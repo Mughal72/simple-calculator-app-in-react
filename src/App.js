@@ -1,67 +1,27 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import "./App.css";
+import Button from "./components/Button";
+
 
 function App() {
-  const inputRef = useRef(null);
-  const resultRef = useRef(null);
-  const [result, setResult] = useState(0);
-
-  function plus(e) {
-    e.preventDefault();
-    setResult((result) => result + Number(inputRef.current.value));
-    resetInput();
-  }
-
-  function minus(e) {
-    e.preventDefault();
-    setResult((result) => result - Number(inputRef.current.value));
-    resetInput();
-  }
-
-  function times(e) {
-    e.preventDefault();
-    setResult((result) => result * Number(inputRef.current.value));
-    resetInput();
-  }
-
-  function divide(e) {
-    e.preventDefault();
-    setResult((result) => result / Number(inputRef.current.value));
-    resetInput();
-  }
-
-  function resetInput() {
-    inputRef.current.value = "";
-  }
-
-  function resetResult(e) {
-    e.preventDefault();
-    setResult(0);
-    resetInput();
-  }
-
-  return (
-    <div className="App">
-      <div>
-        <h1>Simplest Working Calculator</h1>
-      </div>
-      <form>
-        <p ref={resultRef}>{/* add the value of the current total */}{result}</p>
-        <input
-          pattern="[0-9]"
-          ref={inputRef}
-          type="number"
-          placeholder="Type a number"
-        />
-        <button onClick={plus}>add</button>
-        <button onClick={minus}>subtract</button>
-        <button onClick={times}>multiply</button>
-        <button onClick={divide}>divide</button>
-        <button onClick={resetInput}>resetInput</button>
-        <button onClick={resetResult}>resetResult</button>
-      </form>
+  return(
+    <div className="app">
+   <div className="calc-wrapper">
+    <div className="row">
+      <Button />
+      <Button />
+      <Button />
+      <Button />
     </div>
+    
+   </div>
+    
+    </div>
+  
   );
+
+  
+  
 }
 
 export default App;
