@@ -30,7 +30,7 @@ const resetInput = () =>{
   
   
   return(
-    <div className="app">
+    <div className="App">
    <div className="calc-wrapper">
     <Input text={text} result={result} />
     <div className="row">
