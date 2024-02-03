@@ -1,71 +1,89 @@
-import React , {useState} from "react";
-import * as math from "mathjs";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import Button from "./components/Button";
-import Input from "./components/Input";
 
+const App = () => {
+  const inputRef = useRef(null);
+  const resultRef = useRef(null);
+  const [result, setResult] = useState(0);
 
-function App() {
-
-  const [text, setText] = useState("")
-  const [result, setResult] = useState("")
-
-    
-  const addToText = (val) => {
-    setText((text) => [...text, val + " "]);
+  // function for add
+  const plus = (e) => {
+    e.preventDefault();
+    const num = inputRef.current.value;
+    console.log(parseFloat(num));
+    setResult((result) => {
+      return result + Number(inputRef.current.value);
+    });
   };
 
-  const calculateResult = () =>{
-    const input = text.join("")  //remove commas
+    // function for minus
+    const minus = (e) => {
+      e.preventDefault();
+      const num = inputRef.current.value;
+      console.log(parseFloat(num));
+      setResult((result) => {
+        return result - Number(inputRef.current.value);
+      });
+    };
 
-    setResult(math.evaluate(input));
-  }
+    // function for times
+    const times = (e) => {
+      e.preventDefault();
+      const num = inputRef.current.value;
+      console.log(parseFloat(num));
+      setResult((result) => {
+        return result * Number(inputRef.current.value);
+      });
+    };
 
-const resetInput = () =>{
-    setText("")
-    setResult("");
-};
+    // function for devide
+    const devide = (e) => {
+      e.preventDefault();
+      const num = inputRef.current.value;
+      console.log(parseFloat(num));
+      setResult((result) => {
+        return result / Number(inputRef.current.value);
+      });
+    };
 
-  const  ButtonColor = "#f2a33c"
-  
-  
-  return(
-    <div className="App">
-   <div className="calc-wrapper">
-    <Input text={text} result={result} />
-    <div className="row">
-      <Button symbol= "7" handleClick={addToText}/>
-      <Button symbol="8" handleClick={addToText}/>
-      <Button  symbol="9" handleClick={addToText}/>
-      <Button symbol="/" handleClick={addToText} color={ButtonColor}/>
+    // reset input field
+    const resetInput = (e) => {
+      e.preventDefault();
+      inputRef.current.value = 0;
+    };
+
+    // reset result 
+    const restResult = (e) =>{
+      e.preventDefault();
+      setResult((result) => result * 0);
+      inputRef.current.value = 0;
+    }
+
+  console.log(result);
+
+  return (
+    <div>
+      <h2>Build a Calculator using React</h2>
+      <form>
+        <p ref={resultRef}>{result}</p>
+        <input
+          type="number"
+          ref={inputRef}
+          name="number"
+          id="number"
+          pattern="[0-9]"
+          placeholder="Type a number"
+        />
+        <br />
+        <button onClick={plus}>add</button>
+        <button onClick={minus}>subtract</button>
+        <button onClick={times}>multiply</button>
+        <button onClick={devide}>devide</button>
+        <button onClick={resetInput} className="btn1">reset input</button>
+        <button onClick={restResult} className="btn2">reset result</button>
+      </form>
     </div>
-    <div className="row">
-      <Button symbol="4" handleClick={addToText}/>
-      <Button symbol="5" handleClick={addToText}/>
-      <Button symbol="6" handleClick={addToText} />
-      <Button symbol="*" handleClick={addToText} color={ButtonColor}/>
-    </div>
-    <div className="row">
-      <Button  symbol="1" handleClick={addToText}/>
-      <Button symbol="2" handleClick={addToText}/>
-      <Button symbol="3" handleClick={addToText} />
-      <Button  symbol="+" handleClick={addToText} color={ButtonColor}/>
-    </div>
-    <div className="row">
-      <Button symbol="0" handleClick={addToText} />
-      <Button symbol="." handleClick={addToText}/>
-      <Button  symbol="=" handleClick={calculateResult}/>
-      <Button  symbol="-" handleClick={addToText} color={ButtonColor}/>
-    </div>
-    <Button  symbol="clear" color="red" handleClick={resetInput}/>
-   </div>
-    
-    </div>
-  
   );
-
-  
-  
-}
+};
 
 export default App;
